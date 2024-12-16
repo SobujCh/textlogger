@@ -1,0 +1,25 @@
+{
+  "name": "textlogger",
+  "version": "1.0.0",
+  "description": "Log text in console and file with timestamp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SobujCh/textlogger.git"
+  },
+  "keywords": [
+    "textlogger"
+  ],
+  "author": "Sobuj Chowdhury",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SobujCh/textlogger/issues"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/@sobujch"
+  },
+  "homepage": "https://github.com/SobujCh/textlogger#readme"
+}
