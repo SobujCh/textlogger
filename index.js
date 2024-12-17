@@ -1,26 +1,27 @@
 var fs = require('fs').promises;
 var util = require('util');
+const path = require('path');
 
-let logDir = __dirname + '/';
+const projectDir = path.dirname(require.main.filename);
+let logDir = projectDir + '/';
 let currentDate = new Date()
 let currentDateTxt = currentDate.toISOString().split('T')[0];
 if (!fileExists(logDir)){ fs.mkdir(logDir); }
 let log_file = false;
-const default_log_file = logDir+currentDateTxt+"-"+Date.now()+'.log'; 
-async function setLogName(name){
+async function setLogName(name=currentDateTxt+"-"+Date.now()+'.log'){
     //check if name includes a file extension
     if(name.includes('.')){
         log_file = logDir+name;
     }else{
         log_file = logDir+name+'.log';
     }
-
-
 }
 async function setLogDir(dir, relative = true){
-    if(relative){dir = __dirname + '/' + dir;}
+    if(relative){dir = projectDir + '/' + dir;}
     if (!fileExists(dir)){ fs.mkdir(dir, { recursive: true }); }
+    if(!dir.endsWith('/')){dir += '/';}
     logDir = dir;
+    setLogName();
 }
 async function currentDateTime(){
     const date = new Date();
@@ -58,8 +59,6 @@ async function textlog(...txt){
     await debuglog(...txt);
 }
 async function debuglog(...txt){
-    let isFileExists = await fileExists(log_file);
-    if(!isFileExists)log_file = default_log_file;
     appendToFile(log_file, await logFormatBW(...txt) + '\n');
 }
 async function appendToFile(filePath, data) {
