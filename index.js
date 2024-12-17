@@ -63,6 +63,7 @@ async function debuglog(...txt){
 }
 async function appendToFile(filePath, data) {
     try {
+        if (!fileExists(filePath)){ fs.writeFile(filePath, ''); }
         await fs.appendFile(filePath, data);
     } catch (error) {
         console.error('Error appending to file', error);
