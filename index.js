@@ -77,5 +77,13 @@ async function fileExists(filePath) {
         return false;
     }
 }
+async function sleep(ms, silent=false) {
+    if(ms>999 && !silent){
+        await textlog('Sleeping for '+ parseInt(ms/1000).toString() +' Seconds 💤');
+    }
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+}
 
-module.exports = {setLogName,setLogDir,textlog,debuglog};
+module.exports = {setLogName,setLogDir,textlog,debuglog,sleep, delay: sleep};
