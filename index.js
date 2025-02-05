@@ -2,7 +2,10 @@ var fs = require('fs').promises;
 var util = require('util');
 const path = require('path');
 
-const projectDir = path.dirname(require.main.filename);
+let projectDir = '';
+try {
+    projectDir = path.dirname(require.main.filename);
+} catch (error) {}
 let logDir = projectDir + '/';
 let currentDate = new Date()
 let currentDateTxt = currentDate.toISOString().split('T')[0];
